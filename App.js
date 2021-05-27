@@ -3,72 +3,73 @@
  * https://github.com/facebook/react-native
  *
  * @format
- * @flow strict-local
+ * @flow
  */
 
 import React from 'react';
 import {
   SafeAreaView,
   StyleSheet,
-  ScrollView,
-  View,
   Text,
   StatusBar,
+  TouchableHighlight,
 } from 'react-native';
 
 import {
-  Header,
-  LearnMoreLinks,
-  Colors,
-  DebugInstructions,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
 
-const App = () => {
-  return (
-    <>
-      <StatusBar barStyle="dark-content" />
-      <Text>Working</Text>
-    </>
-  );
-};
+  Colors,
+
+} from 'react-native/Libraries/NewAppScreen';
+import Analytics from 'appcenter-analytics';
+
+class App extends React.Component {
+  __addCartButtonPressed = () => {
+
+    Analytics.trackEvent('Add to Cart pressed', {
+      productName: "PlayStation 4 console'",
+      productId: '2443ds5',
+      os: 'ios',
+      screen: 'AddToCartScreen',
+    });
+  };
+  render() {
+    return (
+      <>
+        <StatusBar barStyle="dark-content" />
+        <SafeAreaView style={styles.container}>
+          <TouchableHighlight
+            style={styles.addToCartButtonStyle}
+            onPress={this.__addCartButtonPressed}>
+            <Text style={styles.addToCartButtonTextStyle}>Add to Cart </Text>
+          </TouchableHighlight>
+        </SafeAreaView>
+      </>
+    );
+  }
+}
 
 const styles = StyleSheet.create({
   scrollView: {
     backgroundColor: Colors.lighter,
   },
-  engine: {
-    position: 'absolute',
-    right: 0,
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    flexDirection: 'row',
+    alignItems: 'center',
   },
-  body: {
-    backgroundColor: Colors.white,
+  addToCartButtonTextStyle: {
+    color: '#fff',
+    fontWeight: 'bold',
+    textAlign: 'center',
   },
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-    color: Colors.black,
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-    color: Colors.dark,
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-  footer: {
-    color: Colors.dark,
-    fontSize: 12,
-    fontWeight: '600',
-    padding: 4,
-    paddingRight: 12,
-    textAlign: 'right',
+  addToCartButtonStyle: {
+    width: 180,
+    height: 45,
+    justifyContent: 'center',
+    borderRadius: 4,
+    backgroundColor: '#ff0000',
+    alignItems: 'center',
   },
 });
 
